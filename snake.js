@@ -1,13 +1,18 @@
 function init(){
+c = 0 ;
 	gameover = false ;
 canvas = document.getElementById("mycanvas") ;
-W = H =  canvas.width = canvas.height = 500;
+W = canvas.width =  650;
+H = canvas.height = 650;
 pen = canvas.getContext('2d') ;
 cs = 50 ;
 score = 5 ;
 
 food_img = new Image() ;
 food_img.src = "apple.jpeg" ;
+food_img2 = new Image() ;
+food_img2.src = "mango.jpg" ;
+
 trophy_img = new Image() ;
 trophy_img.src = "trophy.jpg" ;
 food = getRandomFood() ;
@@ -37,6 +42,7 @@ updatesnake:function(){
 
 	if(x1 == food.x && y1 == food.y){
 		food = getRandomFood() ;
+                 c++ ;
 		score++ ;
 	}
 	else{
@@ -94,8 +100,13 @@ document.addEventListener("keydown",keypressed) ;
 function draw(){
 pen.clearRect(0,0,W,H) ;
 snake.drawsnake() ;
+if(c%3 == 0){
+	pen.drawImage(food_img,food.x*cs,food.y*cs,cs,cs) ;
+       }
+else{
+	pen.drawImage(food_img2,food.x*cs,food.y*cs,cs,cs) ;
+}
 
-pen.drawImage(food_img,food.x*cs,food.y*cs,cs,cs) ;
 pen.drawImage(trophy_img,18,20,cs+25,cs+25) ; 
 pen.fillStyle = "black" ;
 pen.font = "20px Roboto" ; 
